@@ -1,6 +1,9 @@
+import QRcode from "./components/QRcode";
 
 export default function Home() {
   return (
-    <div> Welcome to the QR Code App</div>
+      <main className="container mx-auto h-screen pt-8 md:pt-48">
+        <QRcode />
+      </main>    
       );
 }
