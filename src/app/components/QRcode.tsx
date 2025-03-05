@@ -39,12 +39,12 @@ function QRcode() {
   }, [qrCodeImageRef]);
 
     return (
-      <div className="p-14 flex justify-center gap-8 items-center max-w-4xl bg-purple-100 rounded-2xl">
-        <div className="w-[256px] p-2 flex flex-col items-center">
-          <div className="w-full">
+      <div className="p-14 sm:mx-auto flex sm:h-auto h-screen flex-col-reverse sm:flex-row justify-center gap-8 items-center max-w-4xl bg-purple-100 sm:rounded-2xl">
+        <div className="w-full sm:w-[256px] p-2 flex flex-col items-center">
+          <div className="w-full flex justify-center">
             <QRCode value={qrCodeValue} ref={qrCodeImageRef} />
           </div>
-          <Button className="rounded-2xl shadow bg-purple-500 text-white w-full mt-4" onClick={handleImageDownload}>
+          <Button className="rounded-2xl shadow bg-purple-500 text-white w-full mt-2 sm:mt-4" onClick={handleImageDownload}>
             Download
           </Button>
         </div>
@@ -53,7 +53,7 @@ function QRcode() {
             <h1 className="text-4xl">QRCode</h1>
             <p className="text-xl">Generator</p>
           </div>
-          <div className="mt-5">
+          <div className="mt-2 sm:mt-5">
             <form>
               <div className="w-full flex flex-col gap-1">
                 <label
@@ -69,7 +69,7 @@ function QRcode() {
                   onChange={handleInput}
                 />
               </div>
-              <Button className="rounded-2xl shadow bg-purple-500 text-white w-full mt-8" onClick={handleGenerateQrCode}>
+              <Button className="rounded-2xl shadow bg-purple-500 text-white w-full mt-2 sm:mt-8" onClick={handleGenerateQrCode}>
                 Generate
               </Button>
             </form>
