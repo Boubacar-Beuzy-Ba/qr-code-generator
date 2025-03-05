@@ -17,6 +17,7 @@ export const metadata: Metadata = {
   description: "A QR Code Generator",
 };
 
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -25,7 +26,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        suppressHydrationWarning
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
