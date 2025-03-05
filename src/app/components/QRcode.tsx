@@ -1,13 +1,14 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input'
-import React, { useState } from 'react'
+import { toPng } from 'html-to-image';
+import React, { useCallback, useRef, useState } from 'react'
 import QRCode from 'react-qr-code';
 
 function QRcode() {
-    const [url, setUrl] = useState('');
-    const [qrCodeValue, setQrCodeValue] = useState('');
+  const [url, setUrl] = useState('');
+  const [qrCodeValue, setQrCodeValue] = useState('');
+  const qrCodeImageRef = useRef(null);
 
     const handleInput = (e: { target: { value: React.SetStateAction<string>; }; }) => {
         setUrl(e.target.value);
@@ -19,15 +20,29 @@ function QRcode() {
    
     }
 
-    const handleImageDownload = (e: any) => {
-        console.log(e);
+  const handleImageDownload = useCallback(() => {
+    if (qrCodeImageRef.current === null) {
+      return;
     }
+
+    toPng(qrCodeImageRef.current, { cacheBust: true })
+      .then((dataUrl) => {
+        const link = document.createElement('a')
+        link.download = 'qrcode.png'
+        link.href = dataUrl
+        link.click()
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+
+  }, [qrCodeImageRef]);
 
     return (
       <div className="p-14 flex justify-center gap-8 items-center max-w-4xl bg-purple-100 rounded-2xl">
         <div className="w-[256px] p-2 flex flex-col items-center">
           <div className="w-full">
-            <QRCode value={qrCodeValue} />
+            <QRCode value={qrCodeValue} ref={qrCodeImageRef} />
           </div>
           <Button className="rounded-2xl shadow bg-purple-500 text-white w-full mt-4" onClick={handleImageDownload}>
             Download
